@@ -16,7 +16,6 @@ Rockbuster Stealth LLC is a movie rental company that used to have stores around
 
 ## Data
 Rockbuster Data Set - This dataset was created by CareerFoundry for use in this analysis. The data set includes information on stores, staff, inventory, film categories, film names, film language, actors, customers, rental history, payment history, & addresses for stores, staff, and customers.
- [-Rockbuster Data Set](https://pages.github.com/)
 
 ## Tools Used
 The data was analysed using a relational database management system and PostgreSQL and visualised in Tableau.
