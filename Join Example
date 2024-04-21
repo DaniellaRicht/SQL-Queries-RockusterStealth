@@ -1,0 +1,24 @@
+## Top Genre ranked by Country with revenue
+
+WITH RevenueRanking AS (
+    SELECT 
+        F.name AS genre, 
+        J.country,
+        SUM(A.amount) AS revenue,
+        RANK() OVER (PARTITION BY J.country ORDER BY SUM(A.amount) DESC) as revenue_rank
+    FROM payment A
+    INNER JOIN rental B ON A.rental_ID = B.rental_ID
+    INNER JOIN inventory C ON B.inventory_ID = C.inventory_ID
+    INNER JOIN film D ON C.film_ID = D.film_ID 
+    INNER JOIN film_category E ON D.film_ID = E.film_ID
+    INNER JOIN category F ON E.category_ID = F.category_ID
+    INNER JOIN customer G ON B.customer_ID = G.customer_ID
+    INNER JOIN address H ON G.address_id = H.address_id
+    INNER JOIN city I ON H.city_id = I.city_id
+    INNER JOIN country J ON I.country_ID = J.country_ID
+    GROUP BY F.name, J.country
+)
+SELECT genre, country, revenue
+FROM RevenueRanking
+WHERE revenue_rank = 1
+ORDER BY country, revenue DESC;
